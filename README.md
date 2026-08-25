@@ -1,6 +1,6 @@
-# Chia-Network/Actions
+# SIGTERM-Labs/Actions
 
-This repository stores internal actions and workflows that will be reused in GitHub Actions across various other Chia-Network repositories. Each `action.yml` file in the directories within this repository should have its own `readme.md` file that describes its use and provides some insight into its functionality. A brief summary of each is listed below as well in order to improve visibility.
+This repository stores useful actions and workflows. Each `action.yml` file in the directories within this repository should have its own `readme.md` file that describes its use and provides some insight into its functionality. A brief summary of each is listed below as well in order to improve visibility.
 
 **If you would like to contribute to this repository, please ensure that you follow the established naming convention.** If the action uses a separate tool, such as Ansible or Terraform, use the existing directory for that tool if it exists or create one if it doesn't. Otherwise, if the action doesn't rely on any third-party tools, create your directory at the root level.
 
@@ -10,21 +10,9 @@ This repository stores internal actions and workflows that will be reused in Git
 
 Runs an ansible playbook against an inventory of hosts
 
-### check-commit-signing
-
-Checks that all commits in a PR have been signed.
-
 ### clean-workspace
 
 Cleans the current workspace prior to running the checkout action, to ensure the job starts with a clean slate.
-
-### create-venv
-
-Creates a venv in the runner temporary path that will be removed upon completion of the job.
-
-### enforce-semver
-
-Ensures that the checked-out code has a GitHub tag that complies with semantic versioning in format `Major.minor.patch`. Supports up to three numeric digits per release type.
 
 ### git-mark-workspace-safe
 
@@ -35,8 +23,6 @@ The underlying checkout issue is resolved, but if you need to commit back to a r
 
 Sets up the global Git config to replace any SSH clone URLs with HTTPS URLs. This must be used after the checkout code action.
 
-### github/keep-alive
-
 ### helm/deploy
 
 Deploys a helm chart to a k8s cluster.
@@ -44,18 +30,6 @@ Deploys a helm chart to a k8s cluster.
 ### k8s/image-pull-secret
 
 Creates/updates a kubernetes image pull secret in a namespace.
-
-### label-conflict
-
-Add/Remove labels when PR's conflict status changes.
-
-### setup-python
-
-Wrapper around actions/setup-python that also supports ARM64 Mac and ARM64 Linux.
-
-### sign/windows
-
-Windows Codesigning. Signs a file with a cert for windows.
 
 ### terraform/plan
 

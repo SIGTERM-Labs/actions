@@ -15,8 +15,10 @@ runs:
   steps:
     - name: Ensure dependencies are present
       run: |
-        ( command -v apk && apk add python3 py3-pip && pip install --break-system-packages j2cli ) || true
-        ( command -v apt-get && apt-get update && apt-get install -y j2cli ) || true
+        if ! command -v j2 >/dev/null 2>&1; then
+          ( command -v apk && apk add python3 py3-pip && pip install --break-system-packages jinjanator ) || true
+          ( command -v apt-get && apt-get update && apt-get install -y j2cli ) || true
+        fi
       shell: sh
 
     - name: Template values

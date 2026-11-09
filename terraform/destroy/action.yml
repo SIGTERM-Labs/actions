@@ -3,7 +3,7 @@ description: "Runs a terraform destroy in the given workspace with the given var
 inputs:
   workspace:
     description: "The terraform workspace to run in. Usually a region/network combination, like testnet7-us-west-2"
-    requied: true
+    required: true
   varfile:
     description: "The vars file to pass to terraform"
     required: true

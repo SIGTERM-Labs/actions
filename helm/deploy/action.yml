@@ -49,4 +49,10 @@ runs:
         if [ "${{ inputs.helm_wait }}" = "true" ]; then
           export WAIT_PARAM="--wait"
         fi
-        helm upgrade --install --create-namespace --namespace ${{ inputs.namespace }} ${REPO_PARAM} ${WAIT_PARAM} --timeout ${{ inputs.helm_timeout }} --values ${{ inputs.helm_values }} ${{ inputs.app_name }} ${{ inputs.helm_chart }} ${HELM_CHART_VERSION_PARAM}
+        # Helm 4 uses server-side apply and fails when another field manager (e.g. a manual
+        # kubectl patch) owns a field. Helm owns these releases, so take the fields back.
+        case "$(helm version --template '{{ .Version }}')" in
+          v3.*) ;;
+          *) export FORCE_CONFLICTS_PARAM="--force-conflicts" ;;
+        esac
+        helm upgrade --install --create-namespace --namespace ${{ inputs.namespace }} ${REPO_PARAM} ${WAIT_PARAM} ${FORCE_CONFLICTS_PARAM} --timeout ${{ inputs.helm_timeout }} --values ${{ inputs.helm_values }} ${{ inputs.app_name }} ${{ inputs.helm_chart }} ${HELM_CHART_VERSION_PARAM}
